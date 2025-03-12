@@ -1,3 +1,22 @@
+/**
+ * Executes JavaScript code in the macOS OSA (Open Scripting Architecture) environment.
+ * This allows interaction with macOS applications like Music, Safari, etc through
+ * their scripting interfaces.
+ *
+ * @example
+ * ```ts
+ * const getCurrentTrack = osa((name: string) =>
+ *   name + " is listening to " +
+ *   Application("Music").currentTrack().name() as string
+ * );
+ *
+ * console.log(await getCurrentTrack("Lino"));
+ * // Outputs: "Lino is listening to <current song name>"
+ * ```
+ *
+ * @param fn Function to execute in OSA environment
+ * @returns Promise that resolves with the result of the executed function
+ */
 export default function osa<T extends unknown[], R>(
   fn: (...args: T) => R,
 ): (...args: T) => Promise<R> {
